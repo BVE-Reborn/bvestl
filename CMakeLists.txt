@@ -1,6 +1,6 @@
-cmake_minimum_required(3.12 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.12 FATAL_ERROR)
 
-project(eastl-polyalloc LANGUAGE CXX)
+project(eastl-polyalloc LANGUAGES CXX)
 
 find_file(EASTL_HEADER_VECTOR vector.h PATH_SUFFIXES EASTL)
 if(NOT EASTL_HEADER_VECTOR)
