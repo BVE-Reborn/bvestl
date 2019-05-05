@@ -9,13 +9,13 @@ endif()
 get_filename_component(EASTL_HEADER ${EASTL_HEADER_VECTOR} DIRECTORY)
 get_filename_component(EASTL_HEADER ${EASTL_HEADER} DIRECTORY)
 
-add_library(eastl-polyalloc INTERFACE)
-target_include_directories(eastl-polyalloc INTERFACE ${EASTL_HEADER})
+add_library(polyalloc INTERFACE)
+target_include_directories(polyalloc INTERFACE ${EASTL_HEADER})
 
 include(GNUInstallDirs)
 
 install(
-    TARGETS eastl-polyalloc EXPORT eastl-polyalloc-config
+    TARGETS polyalloc EXPORT eastl-polyalloc-config
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}/
     ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}/
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}/
