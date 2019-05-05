@@ -12,6 +12,8 @@ namespace eastl::polyalloc {
 		allocator(allocator&&) = delete;
 		allocator& operator=(allocator const&) = delete;
 		allocator& operator=(allocator&&) = delete;
+		
+		virtual ~allocator() = default;
 
 		virtual void* allocate(size_t n, int flags = 0) = 0;
 		virtual void* allocate(size_t n, size_t alignment, size_t offset, int flags = 0) = 0;
