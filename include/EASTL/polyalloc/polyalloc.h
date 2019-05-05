@@ -5,7 +5,7 @@
 #include <EASTL/internal/config.h>
 
 namespace eastl::polyalloc {
-		class Allocator {
+	class Allocator {
 	  public:
 		Allocator() = default;
 		Allocator(Allocator const&) = delete;
@@ -41,7 +41,7 @@ namespace eastl::polyalloc {
 		}
 
 		EA_FORCE_INLINE const char* get_name() const {
-			return "Allocator Handle";
+			return "EASTL Polyalloc Allocator Handle";
 		}
 
 		EA_FORCE_INLINE void set_name(const char*) {}
@@ -57,5 +57,4 @@ namespace eastl::polyalloc {
 	  private:
 		Allocator* allocator_;
 	};
-	AllocatorHandle* default_allocator();
 }

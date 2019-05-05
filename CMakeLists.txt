@@ -15,7 +15,7 @@ target_include_directories(eastl-polyalloc INTERFACE ${EASTL_HEADER})
 include(GNUInstallDirs)
 
 install(
-    TARGETS eastl-polyalloc CONFIG eastl-polyalloc-config
+    TARGETS eastl-polyalloc EXPORT eastl-polyalloc-config
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}/
     ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}/
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}/
@@ -29,5 +29,5 @@ install(
 install(
     DIRECTORY ${CMAKE_SOURCE_DIR}/include/
     DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/
-    FILES_MATCHING PATTERN "*.hpp*"
+    FILES_MATCHING PATTERN "*.h*"
 )
