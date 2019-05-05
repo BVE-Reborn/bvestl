@@ -15,7 +15,8 @@ polymorphic allocator to do all its allocation.
 
 `allocator_handle` is what you pass between functions or pass around inside containers. These are handles to a child of
 `allocator`. The `allocator` is the class that has the heap and does the allocation. The allocator_handle is a nice wrapper
-that provides the semantics that EASTL and libraries need.
+that provides the semantics that EASTL and libraries need. The pointer to an allocator that you hand to the `allocator_handle`
+is **non-owning**. You are responsible for ensuring the allocator has a lifetime long enough.
 
 ```cpp
 #include <EASTL/polyalloc/polyalloc.h> // For allocator_handle
