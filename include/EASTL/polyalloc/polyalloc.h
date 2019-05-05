@@ -22,7 +22,7 @@ namespace eastl::polyalloc {
 	  public:
 		EA_FORCE_INLINE allocator_handle(Allocator* allocator, char const* = nullptr) : allocator_(allocator) {}
 
-		EA_FORCE_INLINE allocator_handle(const allocator_handle& x, const char* = nullptr) : allocator_(x.allocator_) {}
+		EA_FORCE_INLINE allocator_handle(const allocator_handle& x, char const* = nullptr) : allocator_(x.allocator_) {}
 
 		EA_FORCE_INLINE ~allocator_handle() = default;
 
@@ -40,11 +40,11 @@ namespace eastl::polyalloc {
 			allocator_->deallocate(p, n);
 		}
 
-		EA_FORCE_INLINE const char* get_name() const {
+		EA_FORCE_INLINE char const* get_name() const {
 			return "EASTL Polyalloc Allocator Handle";
 		}
 
-		EA_FORCE_INLINE void set_name(const char*) {}
+		EA_FORCE_INLINE void set_name(char const*) {}
 
 		EA_FORCE_INLINE bool operator==(allocator_handle const& rhs) const {
 			return allocator_ == rhs.allocator_;
