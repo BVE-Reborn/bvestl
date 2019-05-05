@@ -50,13 +50,15 @@ To demonstrate how to make your own allocator, the following is an example of a 
 
 using eastl::polyalloc::allocator;
 
-class mallocator : allocator {
+class mallocator final : public allocator {
   public:
     mallocator() = default;
     mallocator(mallocator const&) = delete;
     mallocator(mallocator&&) = delete;
     mallocator& operator=(mallocator const&) = delete;
     mallocator& operator=(mallocator&&) = delete;
+
+    ~MAllocator() override = default;
 
     void* allocate(size_t n, int flags = 0) override {
         return malloc(n);
