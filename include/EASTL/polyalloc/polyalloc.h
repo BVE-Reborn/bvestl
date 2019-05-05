@@ -20,31 +20,31 @@ namespace eastl::polyalloc {
 
 	class allocator_handle {
 	  public:
-		EA_FORCE_INLINE allocator_handle(Allocator* allocator, char const* = nullptr) : allocator_(allocator) {}
+		EA_FORCE_INLINE allocator_handle(Allocator* const allocator, char const* const = nullptr) noexcept : allocator_(allocator) {}
 
-		EA_FORCE_INLINE allocator_handle(const allocator_handle& x, char const* = nullptr) : allocator_(x.allocator_) {}
+		EA_FORCE_INLINE allocator_handle(const allocator_handle& x, char const* const = nullptr) noexcept : allocator_(x.allocator_) {}
 
-		EA_FORCE_INLINE ~allocator_handle() = default;
+		EA_FORCE_INLINE ~allocator_handle() noexcept = default;
 
-		EA_FORCE_INLINE allocator_handle& operator=(const allocator_handle& x) = default;
+		EA_FORCE_INLINE allocator_handle& operator=(const allocator_handle& x) noexcept = default;
 
-		EA_FORCE_INLINE void* allocate(size_t n, int flags = 0) {
+		EA_FORCE_INLINE void* allocate(size_t const n, int const flags = 0) {
 			return allocator_->allocate(n, flags);
 		}
 
-		EA_FORCE_INLINE void* allocate(size_t n, size_t alignment, size_t offset, int flags = 0) {
+		EA_FORCE_INLINE void* allocate(size_t const n, size_t const alignment, size_t const offset, int const flags = 0) {
 			return allocator_->allocate(n, alignment, offset, flags);
 		}
 
-		EA_FORCE_INLINE void deallocate(void* p, size_t n) {
+		EA_FORCE_INLINE void deallocate(void* const p, size_t const n) {
 			allocator_->deallocate(p, n);
 		}
 
-		EA_FORCE_INLINE char const* get_name() const {
+		EA_FORCE_INLINE char const* get_name() const noexcept {
 			return "EASTL Polyalloc Allocator Handle";
 		}
 
-		EA_FORCE_INLINE void set_name(char const*) {}
+		EA_FORCE_INLINE void set_name(char const* const) const noexcept {}
 
 		EA_FORCE_INLINE bool operator==(allocator_handle const& rhs) const {
 			return allocator_ == rhs.allocator_;
