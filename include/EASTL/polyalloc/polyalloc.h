@@ -22,6 +22,8 @@ namespace eastl::polyalloc {
 
 	class allocator_handle {
 	  public:
+		EA_FORCE_INLINE allocator_handle(char const* const = nullptr) noexcept : allocator_(nullptr) {}
+
 		EA_FORCE_INLINE allocator_handle(allocator* const allocator, char const* const = nullptr) noexcept : allocator_(allocator) {}
 
 		EA_FORCE_INLINE allocator_handle(const allocator_handle& x, char const* const = nullptr) noexcept : allocator_(x.allocator_) {}
