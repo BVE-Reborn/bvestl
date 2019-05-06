@@ -58,7 +58,7 @@ class mallocator final : public allocator {
     mallocator& operator=(mallocator const&) = delete;
     mallocator& operator=(mallocator&&) = delete;
 
-    ~MAllocator() override = default;
+    ~mallocator() override = default;
 
     void* allocate(size_t n, int flags = 0) override {
         return malloc(n);
