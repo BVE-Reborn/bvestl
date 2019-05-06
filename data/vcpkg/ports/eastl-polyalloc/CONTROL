@@ -1,4 +1,4 @@
 Source: eastl-polyalloc
-Version: v0.4
+Version: v0.5
 Description: Standard polymorphic allocator for EASTL containers.
 Build-Depends: eastl

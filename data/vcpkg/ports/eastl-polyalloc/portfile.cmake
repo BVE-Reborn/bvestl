@@ -3,8 +3,8 @@ include(vcpkg_common_functions)
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO BVE-Reborn/eastl-polyalloc
-    REF v0.4
-    SHA512 c0f1ca694b83f3ad61db0cb721799b77c17117895a9780f20d86502744f2c14f09acfcb8528a0c2186fda78633b6d3c40b0dc03a9bcd375023f2fd9591b2f3ea
+    REF v0.5
+    SHA512 6419e36e08f9f59bb0dc4cdcda9d1119a0fd8f477272a1d5c84c5207ce81807510dbc65d204afa45257075218fb0d673c360fe79896dd98fc90ceccd825f6497
     HEAD_REF master
 )
 
