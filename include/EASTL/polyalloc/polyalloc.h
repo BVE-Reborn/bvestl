@@ -4,7 +4,19 @@
 #include <EABase/config/eacompilertraits.h>
 #include <EASTL/internal/config.h>
 
+#ifndef EASTL_POLYALLOC_ASSERT
+	#include <cassert>
+	#define EASTL_POLYALLOC_ASSERT assert
+#endif
+
+#ifndef EASTL_POLYALLOC_NO_ASSERT_ON_DEFAULT_CONSTRUCT
+	#define EASTL_POLYALLOC_DEFAULT_CONSTRUCT_ASSERT EASTL_POLYALLOC_ASSERT(false && "Default Constructing an AllocatorHandle is always a bug.")
+#else
+	#define EASTL_POLYALLOC_DEFAULT_CONSTRUCT_ASSERT
+#endif
+
 namespace eastl::polyalloc {
+
 	class allocator {
 	  public:
 		allocator() = default;
@@ -22,7 +34,10 @@ namespace eastl::polyalloc {
 
 	class allocator_handle {
 	  public:
-		EA_FORCE_INLINE allocator_handle(char const* const = nullptr) noexcept : allocator_(nullptr) {}
+	  	// Needs to exist because EASTL won't compile without it. Should not ever be called.
+		EA_FORCE_INLINE allocator_handle(char const* const = nullptr) noexcept : allocator_(nullptr) {
+			EASTL_POLYALLOC_DEFAULT_CONSTRUCT_ASSERT;
+		}
 
 		EA_FORCE_INLINE allocator_handle(allocator* const allocator, char const* const = nullptr) noexcept : allocator_(allocator) {}
 
