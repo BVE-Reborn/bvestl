@@ -1,7 +1,8 @@
 cmake_minimum_required(VERSION 3.12 FATAL_ERROR)
 
-project(eastl-polyalloc LANGUAGES CXX)
+project(bvestl LANGUAGES CXX)
 
+# Find EASTL
 find_file(EASTL_HEADER_VECTOR vector.h PATH_SUFFIXES EASTL)
 if(NOT EASTL_HEADER_VECTOR)
 	message(FATAL_ERROR "EASTL not found")
@@ -9,21 +10,21 @@ endif()
 get_filename_component(EASTL_HEADER ${EASTL_HEADER_VECTOR} DIRECTORY)
 get_filename_component(EASTL_HEADER ${EASTL_HEADER} DIRECTORY)
 
-add_library(polyalloc INTERFACE)
-target_include_directories(polyalloc INTERFACE ${EASTL_HEADER})
+add_library(bvestl INTERFACE)
+target_include_directories(bvestl INTERFACE ${EASTL_HEADER})
 
 include(GNUInstallDirs)
 
 install(
-    TARGETS polyalloc EXPORT eastl-polyalloc-config
+    TARGETS bvestl EXPORT bvestl-config
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}/
     ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}/
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}/
 )
 
 install(
-    EXPORT eastl-polyalloc-config DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/eastl-polyalloc
-    NAMESPACE eastl::
+    EXPORT bvestl-config DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/bvestl
+    NAMESPACE bvestl::
 )
 
 install(
