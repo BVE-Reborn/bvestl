@@ -2,9 +2,9 @@ include(vcpkg_common_functions)
 
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
-    REPO BVE-Reborn/eastl-polyalloc
-    REF v0.5
-    SHA512 6419e36e08f9f59bb0dc4cdcda9d1119a0fd8f477272a1d5c84c5207ce81807510dbc65d204afa45257075218fb0d673c360fe79896dd98fc90ceccd825f6497
+    REPO BVE-Reborn/bvestl
+    REF v0.1.0
+    SHA512 044d4c1650753ac4c60d3b92cdde10c379ca63feded880b7baeeaa64f2ea63670d1fda78315e71d65a434bfb0e1f777f25d4f95c83104c5a1d55211baa901ec9
     HEAD_REF master
 )
 
@@ -20,4 +20,4 @@ vcpkg_fixup_cmake_targets()
 file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug)
 
 # Handle copyright
-file(INSTALL ${SOURCE_PATH}/LICENSE DESTINATION ${CURRENT_PACKAGES_DIR}/share/eastl-polyalloc RENAME copyright)
+file(INSTALL ${SOURCE_PATH}/LICENSE DESTINATION ${CURRENT_PACKAGES_DIR}/share/bvestl RENAME copyright)
