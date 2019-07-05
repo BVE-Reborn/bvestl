@@ -7,11 +7,17 @@ find_file(EASTL_HEADER_VECTOR vector.h PATH_SUFFIXES EASTL)
 if(NOT EASTL_HEADER_VECTOR)
 	message(FATAL_ERROR "EASTL not found")
 endif()
-get_filename_component(EASTL_HEADER ${EASTL_HEADER_VECTOR} DIRECTORY)
-get_filename_component(EASTL_HEADER ${EASTL_HEADER} DIRECTORY)
+get_filename_component(EASTL_HEADER_DIR ${EASTL_HEADER_VECTOR} DIRECTORY)
+get_filename_component(EASTL_HEADER_DIR ${EASTL_HEADER_DIR} DIRECTORY)
 
-add_library(bvestl INTERFACE)
-target_include_directories(bvestl INTERFACE ${EASTL_HEADER})
+file(GLOB_RECURSE BVESTL_SOURCE LIST_DIRECTORIES false CONFIGURE_DEPENDS "src/*.cpp")
+file(GLOB_RECURSE BVESTL_HEADERS LIST_DIRECTORIES false CONFIGURE_DEPENDS "include/*.hpp")
+
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${BVESTL_SOURCE} ${BVESTL_HEADERS})
+
+add_library(bvestl SHARED ${BVESTL_SOURCE} ${BVESTL_HEADERS})
+target_include_directories(bvestl INTERFACE ${EASTL_HEADER_DIR})
+target_include_directories(bvestl PUBLIC $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>)
 
 include(GNUInstallDirs)
 
