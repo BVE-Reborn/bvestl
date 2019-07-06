@@ -1,19 +1,36 @@
 cmake_minimum_required(VERSION 3.12 FATAL_ERROR)
-
 project(bvestl LANGUAGES CXX)
 
-# Find EASTL
-find_file(EASTL_HEADER_VECTOR vector.h PATH_SUFFIXES EASTL)
-if(NOT EASTL_HEADER_VECTOR)
-	message(FATAL_ERROR "EASTL not found")
-endif()
-get_filename_component(EASTL_HEADER ${EASTL_HEADER_VECTOR} DIRECTORY)
-get_filename_component(EASTL_HEADER ${EASTL_HEADER} DIRECTORY)
+include(GenerateExportHeader)
 
-add_library(bvestl INTERFACE)
-target_include_directories(bvestl INTERFACE ${EASTL_HEADER})
+if(VCPKG_TOOLCHAIN)
+	set(VCPKG_INSTALLED_PATH "${_VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}")
+	set(VCPKG_INSTALLED_PATH_DEBUG "${_VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/debug")
+    include_directories(SYSTEM "${_VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/include")
+endif()
+
+# Find EASTL
+find_library(EASTL_NAME EASTL PATHS ${VCPKG_INSTALLED_PATH} PATH_SUFFIXES lib NO_DEFAULT_PATH)
+find_library(EASTL_DEBUG_NAME EASTL PATHS ${VCPKG_INSTALLED_PATH_DEBUG} PATH_SUFFIXES lib NO_DEFAULT_PATH)
+set(EASTL_LINK_LIBRARIES $<$<CONFIG:Debug>:${EASTL_DEBUG_NAME}> $<$<NOT:$<CONFIG:Debug>>:${EASTL_NAME}>
+)
+
+file(GLOB_RECURSE BVESTL_SOURCE LIST_DIRECTORIES false CONFIGURE_DEPENDS "src/*.cpp")
+file(GLOB_RECURSE BVESTL_HEADERS LIST_DIRECTORIES false CONFIGURE_DEPENDS "include/*.hpp")
+
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${BVESTL_SOURCE} ${BVESTL_HEADERS})
+
+add_library(bvestl STATIC ${BVESTL_SOURCE} ${BVESTL_HEADERS})
+target_include_directories(bvestl PUBLIC $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>)
+target_link_libraries(bvestl PUBLIC ${EASTL_LINK_LIBRARIES})
 
 include(GNUInstallDirs)
+
+generate_export_header(
+	bvestl
+	BASE_NAME BVESTL
+	EXPORT_FILE_NAME include/bvestl/api.hpp
+)
 
 install(
     TARGETS bvestl EXPORT bvestl-config
@@ -28,7 +45,7 @@ install(
 )
 
 install(
-    DIRECTORY ${CMAKE_SOURCE_DIR}/include/
+    DIRECTORY ${CMAKE_SOURCE_DIR}/include/ ${CMAKE_BINARY_DIR}/include/
     DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/
     FILES_MATCHING PATTERN "*.h*"
 )
