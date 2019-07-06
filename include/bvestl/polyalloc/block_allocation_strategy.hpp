@@ -11,15 +11,13 @@ namespace bvestl {
 		struct AllocationInfo;
 
 		/*!
-		 * \brief An block allocator for GPU memory
+		 * \brief An block allocation strategy
 		 *
-		 * This class is meant to exist alongside an actual GPU memory allocation, either a VkMemory or an ID3D12Heap. This class only provides
-		 * offsets into the actual GPU memory, it doesn't do anything with the GPU memory itself. Therefore it doesn't have any notion of device
-		 * local or host coherent memory, because that's handled at a higher level
-		 *
-		 * There is nothing GPU-specific in this class and perhaps one day it'll have a name to reflect that
+		 * Block allocators support both allocation and deallocation. They maintain an internal list of free memory 
+		 * regions, passing information about newly-allocated memory regions in the data section of `AllocationInfo`. 
+		 * They're great for like an object pool or somewhere else you'd be freeing memory from
 		 */
-		class BlockAllocator final : public AllocationStrategy {
+		class BlockAllocationStrategy final : public AllocationStrategy {
 			// Basically the allocator from https://www.fasterthan.life/blog/2017/7/13/i-am-graphics-and-so-can-you-part-4- but I've changed it
 			// so my allocator only deals with sizes and offsets, and doesn't care about memory types at all
 		public:
@@ -42,9 +40,9 @@ namespace bvestl {
 			 * \param size The size of the memory that this boi can allocate from
 			 * \param alignment_in The alignment of all allocations from this allocator
 			 */
-			BlockAllocator(allocator_handle& allocator_in, Bytes size, Bytes alignment_in = Bytes(0));
+			BlockAllocationStrategy(allocator_handle& allocator_in, Bytes size, Bytes alignment_in = Bytes(0));
 
-			~BlockAllocator();
+			~BlockAllocationStrategy();
 
 			/*!
 			 * \brief Allocates the specified amount of memory, filling out `allocation` if the allocation is successful

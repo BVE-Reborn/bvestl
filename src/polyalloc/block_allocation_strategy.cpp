@@ -1,4 +1,4 @@
-#include "bvestl/polyalloc/block_allocator.hpp"
+#include "bvestl/polyalloc/block_allocation_strategy.hpp"
 #include "bvestl/polyalloc/allocation_structs.hpp"
 #include "bvestl/util/memory_utils.hpp"
 
@@ -6,13 +6,13 @@ using namespace bvestl::polyalloc::operators;
 
 namespace bvestl {
 	namespace polyalloc {
-		BlockAllocator::BlockAllocator(allocator_handle& allocator_in, const Bytes size, const Bytes alignment_in)
+		BlockAllocationStrategy::BlockAllocationStrategy(allocator_handle& allocator_in, const Bytes size, const Bytes alignment_in)
 			: allocator(allocator_in), memory_size(size), alignment(alignment_in) {
 
 			head = make_new_block(0_b, size);
 		}
 
-		BlockAllocator::~BlockAllocator() {
+		BlockAllocationStrategy::~BlockAllocationStrategy() {
 			Block* next = nullptr;
 			Block* current = head;
 
@@ -27,7 +27,7 @@ namespace bvestl {
 			}
 		}
 
-		bool BlockAllocator::allocate(Bytes size, AllocationInfo& allocation) {
+		bool BlockAllocationStrategy::allocate(Bytes size, AllocationInfo& allocation) {
 			size = align(size, alignment);
 
 			const Bytes free_size = memory_size - allocated;
@@ -71,7 +71,7 @@ namespace bvestl {
 			return true;
 		}
 
-		void BlockAllocator::free(const AllocationInfo& alloc) {
+		void BlockAllocationStrategy::free(const AllocationInfo& alloc) {
 			Block* block = static_cast<Block*>(alloc.internal_data);
 			block->free = true;
 
@@ -108,7 +108,7 @@ namespace bvestl {
 			allocated -= alloc.size;
 		}
 
-		BlockAllocator::Block* BlockAllocator::make_new_block(const Bytes offset, const Bytes size) {
+		BlockAllocationStrategy::Block* BlockAllocationStrategy::make_new_block(const Bytes offset, const Bytes size) {
 			void* mem = allocator.allocate(sizeof(Block));
 			Block* block = new(mem) Block;
 			block->id = next_block_id;

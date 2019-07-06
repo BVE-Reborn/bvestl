@@ -7,7 +7,7 @@ namespace bvestl {
 		struct AllocationInfo;
 
         /*!
-         * \brief Interface for a 
+         * \brief Interface for an allocation strategy
          */
 		class AllocationStrategy {
 		public:
