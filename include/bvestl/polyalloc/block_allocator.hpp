@@ -2,9 +2,9 @@
 
 #include <cstdint>
 
-#include <bvestl/polyalloc/polyalloc.hpp>
+#include "bvestl/polyalloc/polyalloc.hpp"
 #include "bvestl/polyalloc/bytes.hpp"
-#include "size_only_allocator.hpp"
+#include "bvestl/polyalloc/allocation_strategy.hpp"
 
 namespace bvestl {
 	namespace polyalloc {
@@ -19,7 +19,7 @@ namespace bvestl {
 		 *
 		 * There is nothing GPU-specific in this class and perhaps one day it'll have a name to reflect that
 		 */
-		class BlockAllocator final : public SizeOnlyAllocator {
+		class BlockAllocator final : public AllocationStrategy {
 			// Basically the allocator from https://www.fasterthan.life/blog/2017/7/13/i-am-graphics-and-so-can-you-part-4- but I've changed it
 			// so my allocator only deals with sizes and offsets, and doesn't care about memory types at all
 		public:

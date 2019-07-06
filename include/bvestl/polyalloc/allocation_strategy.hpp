@@ -6,9 +6,12 @@ namespace bvestl {
 	namespace polyalloc {
 		struct AllocationInfo;
 
-		class SizeOnlyAllocator {
+        /*!
+         * \brief Interface for a 
+         */
+		class AllocationStrategy {
 		public:
-			virtual ~SizeOnlyAllocator() = default;
+			virtual ~AllocationStrategy() = default;
 
 			virtual bool allocate(Bytes size, AllocationInfo& allocation) = 0;
 

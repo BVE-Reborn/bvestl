@@ -1,7 +1,7 @@
 #pragma once
 
 #include "bvestl/polyalloc/bytes.hpp"
-#include "size_only_allocator.hpp"
+#include "bvestl/polyalloc/allocation_strategy.hpp"
 
 namespace bvestl {
 	namespace polyalloc {
@@ -11,7 +11,7 @@ namespace bvestl {
 		 * \brief Allocated memory linearly from a single pool. Memory must be freed all at once, there's no support for freeing individual
 		 * allocations
 		 */
-		class BumpPointAllocator final : public SizeOnlyAllocator {
+		class BumpPointAllocator final : public AllocationStrategy {
 		public:
 			struct Allocation {
 				Bytes offset{ 0 };
