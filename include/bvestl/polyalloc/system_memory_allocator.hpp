@@ -3,7 +3,7 @@
 #include "bvestl/polyalloc/polyalloc.hpp"
 #include <memory>
 #include "bytes.hpp"
-#include <unordered_map>
+#include <EASTL/unordered_map.h>
 #include "bvestl/polyalloc/allocation_structs.hpp"
 
 namespace bvestl {
@@ -37,7 +37,7 @@ namespace bvestl {
 			uint8_t* memory;
 			const Bytes memory_size;
 			std::unique_ptr<AllocationStrategy> alloc_strategy;
-			std::unordered_map<void*, AllocationInfo> allocation_infos;
+			eastl::unordered_map<void*, AllocationInfo> allocation_infos;
 		};
 	}
 }
