@@ -1,5 +1,6 @@
 #pragma once
 
+#include "bvestl/api.hpp"
 #include "bvestl/polyalloc/bytes.hpp"
 #include "EASTL/default_new.hpp"
 
@@ -8,7 +9,7 @@ namespace bvestl {
 		/*!
 		 * Information about an allocation from an allocation strategy
 		 */
-		struct AllocationInfo {
+		struct BVESTL_EXPORT AllocationInfo {
 			/*!
 			 * \brief The size of the allocation, in bytes
 			 */

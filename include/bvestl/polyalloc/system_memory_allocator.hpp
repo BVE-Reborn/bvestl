@@ -1,5 +1,6 @@
 #pragma once
 
+#include "bvestl/api.hpp"
 #include "bvestl/polyalloc/polyalloc.hpp"
 #include <EASTL/unique_ptr.h>
 #include "bytes.hpp"
@@ -8,13 +9,13 @@
 
 namespace bvestl {
 	namespace polyalloc {
-		class AllocationStrategy;
+		class BVESTL_EXPORT AllocationStrategy;
 
 		/*!
 		 * \brief A coupling of a memory resource and a allocator. Allows all the fun of allocating memory _and_ the fun of
 		 * not understanding how this system works
 		 */
-		class SystemMemoryAllocator : public Allocator {
+		class BVESTL_EXPORT SystemMemoryAllocator : public Allocator {
 		public:
 			/*!
 			 * \brief Constructs a CPU Allocated memory object with a region of memory and the allocation strategy to use

@@ -1,9 +1,9 @@
 #pragma once
 
+#include "bvestl/api.hpp"
 #include <EABase/config/eacompilertraits.h>
 #include <cstdlib>
 #include <iosfwd>
-#include "bvestl/util/inlining_util.hpp"
 
 namespace bvestl {
 	namespace polyalloc {
@@ -22,7 +22,7 @@ namespace bvestl {
 		  *
 		  * You can use the user-defined literals `_b`, `_kb`, `_mb`, and `_gb`.
 		  */
-		class Bytes {
+		class BVESTL_EXPORT Bytes {
 		public:
 			constexpr explicit EA_FORCE_INLINE Bytes(std::size_t const count) noexcept : byte_count(count) {};
 			constexpr EA_FORCE_INLINE Bytes(Bytes const& other) noexcept = default;
