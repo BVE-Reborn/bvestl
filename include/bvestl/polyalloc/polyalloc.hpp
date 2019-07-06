@@ -17,15 +17,15 @@
 
 namespace bvestl {
 	namespace polyalloc {
-		class allocator {
+		class Allocator {
 		  public:
-			allocator() = default;
-			allocator(allocator const&) = delete;
-			allocator(allocator&&) = delete;
-			allocator& operator=(allocator const&) = delete;
-			allocator& operator=(allocator&&) = delete;
+			Allocator() = default;
+			Allocator(Allocator const&) = delete;
+			Allocator(Allocator&&) = delete;
+			Allocator& operator=(Allocator const&) = delete;
+			Allocator& operator=(Allocator&&) = delete;
 			
-			virtual ~allocator() = default;
+			virtual ~Allocator() = default;
 
 			virtual void* allocate(size_t n, int flags = 0) = 0;
 			virtual void* allocate(size_t n, size_t alignment, size_t offset, int flags = 0) = 0;
@@ -39,7 +39,7 @@ namespace bvestl {
 				BVESTL_POLYALLOC_DEFAULT_CONSTRUCT_ASSERT;
 			}
 
-			EA_FORCE_INLINE allocator_handle(allocator* const allocator, char const* const = nullptr) noexcept : allocator_(allocator) {}
+			EA_FORCE_INLINE allocator_handle(Allocator* const allocator, char const* const = nullptr) noexcept : allocator_(allocator) {}
 
 			EA_FORCE_INLINE allocator_handle(const allocator_handle& x, char const* const = nullptr) noexcept : allocator_(x.allocator_) {}
 
@@ -74,7 +74,7 @@ namespace bvestl {
 			}
 
 		  private:
-			allocator* allocator_;
+			Allocator* allocator_;
 		};
 	}
 }

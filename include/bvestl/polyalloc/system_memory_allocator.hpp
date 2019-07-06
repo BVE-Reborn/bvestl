@@ -14,18 +14,18 @@ namespace bvestl {
 		 * \brief A coupling of a memory resource and a allocator. Allows all the fun of allocating memory _and_ the fun of
 		 * not understanding how this system works
 		 */
-		class CpuMemoryAllocator : public allocator {
+		class SystemMemoryAllocator : public Allocator {
 		public:
 			/*!
 			 * \brief Constructs a CPU Allocated memory object with a region of memory and the allocation strategy to use
-			 * 
+			 *
 			 * \param memory A pointer to the region of memory to allocate from
 			 * \param size The size of the region of memory region
 			 * \param alloc_strategy The allocation strategy to use when allocating memory
 			 */
-			CpuMemoryAllocator(uint8_t* memory, const Bytes size, std::unique_ptr<AllocationStrategy> alloc_strategy) : memory(memory), memory_size(size), alloc_strategy(std::move(alloc_strategy)) {}
+			SystemMemoryAllocator(uint8_t* memory, const Bytes size, std::unique_ptr<AllocationStrategy> alloc_strategy) : memory(memory), memory_size(size), alloc_strategy(std::move(alloc_strategy)) {}
 
-			~CpuMemoryAllocator() override = default;
+			~SystemMemoryAllocator() override = default;
 
 			void* allocate(size_t n, int flags) override;
 

@@ -42,7 +42,7 @@ namespace bvestl {
 			 * \param size The size of the memory that this boi can allocate from
 			 * \param alignment_in The alignment of all allocations from this allocator
 			 */
-			BlockAllocator(bvestl::polyalloc::allocator_handle& allocator_in, Bytes size, Bytes alignment_in = Bytes(0));
+			BlockAllocator(allocator_handle& allocator_in, Bytes size, Bytes alignment_in = Bytes(0));
 
 			~BlockAllocator();
 
