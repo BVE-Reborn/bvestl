@@ -1,15 +1,16 @@
 #pragma once
 
+#include "bvestl/api.hpp"
 #include "bvestl/polyalloc/bytes.hpp"
 
 namespace bvestl {
 	namespace polyalloc {
-		struct AllocationInfo;
+		struct BVESTL_EXPORT AllocationInfo;
 
         /*!
          * \brief Interface for an allocation strategy
          */
-		class AllocationStrategy {
+		class BVESTL_EXPORT AllocationStrategy {
 		public:
 			virtual ~AllocationStrategy() = default;
 

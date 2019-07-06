@@ -2,13 +2,14 @@
 
 #include <cstdint>
 
-#include "bvestl/polyalloc/polyalloc.hpp"
+#include "bvestl/api.hpp"
 #include "bvestl/polyalloc/bytes.hpp"
 #include "bvestl/polyalloc/allocation_strategy.hpp"
 
 namespace bvestl {
 	namespace polyalloc {
-		struct AllocationInfo;
+		struct BVESTL_EXPORT AllocationInfo;
+		class BVESTL_EXPORT allocator_handle;
 
 		/*!
 		 * \brief An block allocation strategy
@@ -17,7 +18,7 @@ namespace bvestl {
 		 * regions, passing information about newly-allocated memory regions in the data section of `AllocationInfo`. 
 		 * They're great for like an object pool or somewhere else you'd be freeing memory from
 		 */
-		class BlockAllocationStrategy final : public AllocationStrategy {
+		class BVESTL_EXPORT BlockAllocationStrategy final : public AllocationStrategy {
 			// Basically the allocator from https://www.fasterthan.life/blog/2017/7/13/i-am-graphics-and-so-can-you-part-4- but I've changed it
 			// so my allocator only deals with sizes and offsets, and doesn't care about memory types at all
 		public:

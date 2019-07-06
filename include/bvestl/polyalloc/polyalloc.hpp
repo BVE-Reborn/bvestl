@@ -4,6 +4,8 @@
 #include <EABase/config/eacompilertraits.h>
 #include <EASTL/internal/config.h>
 
+#include "bvestl/api.hpp"
+
 #ifndef BVESTL_POLYALLOC_ASSERT
 	#include <cassert>
 	#define BVESTL_POLYALLOC_ASSERT assert
@@ -17,7 +19,7 @@
 
 namespace bvestl {
 	namespace polyalloc {
-		class Allocator {
+		class BVESTL_EXPORT Allocator {
 		  public:
 			Allocator() = default;
 			Allocator(Allocator const&) = delete;
@@ -32,7 +34,7 @@ namespace bvestl {
 			virtual void deallocate(void* p, size_t n) = 0;
 		};
 
-		class allocator_handle {
+		class BVESTL_EXPORT allocator_handle {
 		  public:
 		  	// Needs to exist because EASTL won't compile without it. Should not ever be called.
 			EA_FORCE_INLINE allocator_handle(char const* const = nullptr) noexcept : allocator_(nullptr) {

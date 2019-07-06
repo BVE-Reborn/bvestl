@@ -1,17 +1,18 @@
 #pragma once
 
+#include "bvestl/api.hpp"
 #include "bvestl/polyalloc/bytes.hpp"
 #include "bvestl/polyalloc/allocation_strategy.hpp"
 
 namespace bvestl {
 	namespace polyalloc {
-		struct AllocationInfo;
+		struct BVESTL_EXPORT AllocationInfo;
 
 		/*!
 		 * \brief Allocates memory linearly from a single pool. Memory must be freed all at once, there's no support for freeing individual
 		 * allocations
 		 */
-		class BumpPointAllocationStrategy final : public AllocationStrategy {
+		class BVESTL_EXPORT BumpPointAllocationStrategy final : public AllocationStrategy {
 		public:
 			struct Allocation {
 				Bytes offset{ 0 };

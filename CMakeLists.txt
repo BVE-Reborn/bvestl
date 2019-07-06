@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.12 FATAL_ERROR)
-
 project(bvestl LANGUAGES CXX)
+
+include(GenerateExportHeader)
 
 if(VCPKG_TOOLCHAIN)
 	set(VCPKG_INSTALLED_PATH "${_VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}")
@@ -19,11 +20,17 @@ file(GLOB_RECURSE BVESTL_HEADERS LIST_DIRECTORIES false CONFIGURE_DEPENDS "inclu
 
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${BVESTL_SOURCE} ${BVESTL_HEADERS})
 
-add_library(bvestl SHARED ${BVESTL_SOURCE} ${BVESTL_HEADERS})
+add_library(bvestl STATIC ${BVESTL_SOURCE} ${BVESTL_HEADERS})
 target_include_directories(bvestl PUBLIC $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>)
 target_link_libraries(bvestl PUBLIC ${EASTL_LINK_LIBRARIES})
 
 include(GNUInstallDirs)
+
+generate_export_header(
+	bvestl
+	BASE_NAME BVESTL
+	EXPORT_FILE_NAME include/bvestl/api.hpp
+)
 
 install(
     TARGETS bvestl EXPORT bvestl-config
@@ -38,7 +45,7 @@ install(
 )
 
 install(
-    DIRECTORY ${CMAKE_SOURCE_DIR}/include/
+    DIRECTORY ${CMAKE_SOURCE_DIR}/include/ ${CMAKE_BINARY_DIR}/include/
     DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/
     FILES_MATCHING PATTERN "*.h*"
 )

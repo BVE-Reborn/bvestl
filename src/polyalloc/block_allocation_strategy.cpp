@@ -1,4 +1,5 @@
 #include "bvestl/polyalloc/block_allocation_strategy.hpp"
+#include "bvestl/polyalloc/polyalloc.hpp"
 #include "bvestl/polyalloc/allocation_structs.hpp"
 #include "bvestl/util/memory_utils.hpp"
 
