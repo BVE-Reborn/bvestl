@@ -496,5 +496,7 @@ MigrationBackup/
 
 # End of https://www.gitignore.io/api/c++,clion,cmake,visualstudio,visualstudiocode
 
+# Build files and generated files
 build/
 build-vcpkg/
+include/bvestl/api.hpp
