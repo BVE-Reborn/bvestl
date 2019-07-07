@@ -29,7 +29,7 @@ include(GNUInstallDirs)
 generate_export_header(
 	bvestl
 	BASE_NAME BVESTL
-	EXPORT_FILE_NAME include/bvestl/api.hpp
+	EXPORT_FILE_NAME ${CMAKE_SOURCE_DIR}/include/bvestl/api.hpp
 )
 
 install(
