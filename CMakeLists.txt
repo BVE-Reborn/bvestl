@@ -21,6 +21,7 @@ source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${BVESTL_SOURCE} ${BVESTL_HE
 
 add_library(bvestl STATIC ${BVESTL_SOURCE} ${BVESTL_HEADERS})
 target_include_directories(bvestl PUBLIC $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>)
+target_include_directories(bvestl PUBLIC $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include>)
 target_link_libraries(bvestl PUBLIC ${EASTL_LINK_LIBRARIES})
 
 include(GNUInstallDirs)
@@ -28,7 +29,7 @@ include(GNUInstallDirs)
 generate_export_header(
 	bvestl
 	BASE_NAME BVESTL
-	EXPORT_FILE_NAME ${CMAKE_SOURCE_DIR}/include/bvestl/api.hpp
+	EXPORT_FILE_NAME include/bvestl/api.hpp
 )
 
 install(
